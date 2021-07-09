@@ -1,0 +1,18 @@
+#!/bin/bash
+
+buildno=../script/buildno
+mysqlId=$(docker-compose ps -q mysql)
+
+docker-compose up -d --build
+
+if [[ -f $buildno ]]; then
+
+    count=`expr $(cat $buildno) + 1`
+
+    echo $count > buildno
+
+else
+    echo "1" > $buildno
+    docker exec -ti mysql tar -xf database.tar.gz && \
+                    mysql -u root --password=admin < database.sql
+fi
