@@ -49,7 +49,7 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
     volumes:
-      - ../database.tar.gz:/database.tar.gz
+      - ../wpdatabase.tar.gz:/wpdatabase.tar.gz
     networks:
       - wpsite
 

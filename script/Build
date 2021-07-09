@@ -1,18 +1,37 @@
 #!/bin/bash
 
 buildno=../script/buildno
-mysqlId=$(docker-compose ps -q mysql)
+
+mysql_container=mysql
+mysql_root_password=admin
+mysql_database=wordpressdb
+
+dump_database=database.tar.gz
+package_database=wpdatabase.tar.gz
 
 docker-compose up -d --build
 
 if [[ -f $buildno ]]; then
 
     count=`expr $(cat $buildno) + 1`
-
     echo $count > buildno
+
+    echo "backuping wordpress database ..."
+    docker exec $mysql_container bash -c "echo 'mysqldump -u root --password=$mysql_root_password \
+                                          $mysql_database > $dump_database' > backup.sh && \
+                                          chmod +x backup.sh && \
+                                          ./backup.sh && \
+                                          tar -czvf $package_database $dump_database"
 
 else
     echo "1" > $buildno
-    docker exec -ti mysql tar -xf database.tar.gz && \
-                    mysql -u root --password=admin < database.sql
+    
+    echo ">> Restoring wordpress database ..."
+
+    docker exec $mysql_container bash -c "tar -xf $package_database && \
+                                          echo '$mysql_container -u root --password=$mysql_root_password \
+                                          $mysql_database < $dump_database' > restore.sh && \
+                                          chmod +x restore.sh && \
+                                          ./restore.sh"
+                      
 fi
