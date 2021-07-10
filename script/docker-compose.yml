@@ -55,7 +55,7 @@ services:
     networks:
       - wpsite
     volumes:
-      - ../database/data:/var/lib/mysql
+      - ../database:/var/lib/mysql
 
 networks:
   wpsite:
