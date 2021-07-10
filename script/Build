@@ -1,14 +1,3 @@
 #!/bin/bash
 
 docker-compose up -d --build
-buildno=./buildno
-
-if [[ -f $buildno ]]; then
-
-    count=`expr $(cat $buildno) + 1`
-
-    echo $count > buildno
-
-else
-    echo "1" > $buildno
-fi
