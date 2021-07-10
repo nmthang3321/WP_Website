@@ -56,7 +56,6 @@ services:
       - wpsite
     volumes:
       - ../database/data:/var/lib/mysql
-      - ../database:/docker-entrypoint-initdb.d
 
 networks:
   wpsite:
