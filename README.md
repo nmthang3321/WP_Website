@@ -3,6 +3,7 @@ prerequisite:
 - Docker environment:
     + Ubuntu: https://docs.docker.com/engine/install/ubuntu/
     + Window: https://docs.docker.com/docker-for-windows/install/
+- Docker compose: https://docs.docker.com/compose/install/
 
 To build project, run this command below: $cd script && ./Build
 
