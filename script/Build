@@ -1,3 +1,24 @@
 #!/bin/bash
 
+mysql_container=mysql
+mysql_user=admin
+mysql_password=admin
+database_name=wordpressdb
+
+if [ "$(docker ps -q -f name=$mysql_container)" ]
+then
+    echo ">> Exporting database from container..."
+
+    if [ -f ../database/schema.sql ]; then
+        docker exec -i $mysql_container mysqldump -u $mysql_user \
+                                                 --password=$mysql_password \
+                                                 $database_name > ../database/schema.sql &> /dev/null
+        echo "Done"
+    else
+        echo "Failed: ../database/schema.sql No such file or directory"
+        exit 1
+    fi
+fi
+
+echo ">> Building wordpress website..."
 docker-compose up -d --build
