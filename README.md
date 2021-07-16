@@ -4,9 +4,7 @@ prerequisite:
     + Ubuntu: https://docs.docker.com/engine/install/ubuntu/
     + Window: https://docs.docker.com/docker-for-windows/install/
 
-To build project, run this command below:
-    $cd script
-    $./Build
+To build project, run this command below: $cd script && ./Build
 
 phpmyadmin will run on port 81: http://localhost:81
 
