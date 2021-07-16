@@ -7,8 +7,8 @@ prerequisite:
 
 To build project, run this command below: $cd script && ./Build
 
-phpmyadmin will run on port 81: http://localhost:81
+phpmyadmin will run on port 81: http://servername:81
 
-Wordpress project run on port 80: http://localhost
+Wordpress project run on port 80: http://servername
 
 Go to docker-compose.yml file to see more information about environment configuration
