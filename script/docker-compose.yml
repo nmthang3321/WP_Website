@@ -22,7 +22,7 @@ services:
       context: .
       dockerfile: php.dockerfile
     volumes:
-      - ../wordpress/src/:/var/www/html/
+      - ../wordpress/src/:/var/www/html/:rw,cached
     networks:
       - wpsite
 
@@ -38,7 +38,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ../wordpress/src/:/var/www/html/
+      - ../wordpress/src/:/var/www/html/:rw,cached
       - ../config/apache.conf:/usr/local/apache2/conf/apache.conf
     networks:
       - wpsite

@@ -16,6 +16,7 @@ then
         echo "Done"
     else
         echo "Failed"
+        exit 1
     fi
 fi
 
